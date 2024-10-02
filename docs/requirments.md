@@ -14,15 +14,16 @@ Non-Functional Requirements: The tool will print out a word in the terminal, and
 Tool & Tech:  
 The backend will be written in Python, this is the only consideration needed for this first phase.
 
-Steps:
-1. Session starts
-2. Random characters generated
-3. Print generated characters out to terminal
-4. Start timer
-5. User input word
-6. Stop timer
-7. Store output characters, user input, time
-8. Repeat 10 times
-9. Finish session
-10. Calculate accuracy and time
-11. Output results
+Steps
+1. ~~Session starts~~
+2. ~~Random characters generated~~
+3. ~~Print generated characters out to terminal~~
+4. ~~Start timer~~
+5. ~~User input word~~
+6. ~~Stop timer~~
+7. ~~Store output characters, user input, time~~
+8. ~~Repeat 10 times~~
+9. ~~Finish session~~
+10. ~~Calculate accuracy and time~~
+11. ~~Output results~~
+#### Phase 1 Complete.
