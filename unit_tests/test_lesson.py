@@ -2,10 +2,16 @@ import pytest
 
 from src.lesson import Lesson, Teacher, Report
 
-def test_teacher():
+def test_teacher_gen_char():
     teacher = Teacher()
-    teacher.gen_word()
-    assert len(teacher.current_word) == 1
+    teacher.gen_char()
+    assert len(teacher.current_char) == 1
+
+def test_teacher_gen_word():
+    teacher = Teacher()
+    teacher.gen_random_word()
+    assert len(teacher.current_word) >= 4
+    assert  len(teacher.current_word) <= 6
 
 def test_lesson_init():
     teacher = Teacher()

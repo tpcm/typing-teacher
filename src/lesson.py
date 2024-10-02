@@ -4,18 +4,29 @@ import time
 
 class Teacher:
     def __init__(self):
+        self.current_char: str
         self.current_word: str
 
-    def gen_word(self):
-        self.current_word = random.choice(string.ascii_lowercase)
+    def gen_char(self):
+        self.current_char = random.choice(string.ascii_lowercase)
+
+    def reset_current_word(self):
+        self.current_word = ""
+
+    def gen_random_word(self):
+        self.reset_current_word()
+        word_length = random.randint(4, 6)
+        for _ in range(word_length):
+            self.gen_char()
+            self.current_word = "".join([self.current_word, self.current_char])
 
     def teach(self):
-        self.gen_word()
+        self.gen_random_word()
         print(self.current_word)
         user_input = input()
         return self.current_word, user_input
-        
-        
+
+
 class Lesson:
     def __init__(self, num_rounds: int, teacher: Teacher):
         self.num_rounds = num_rounds
@@ -29,12 +40,12 @@ class Lesson:
         self.lesson_state[round_num] = [test_word, user_input, time_taken]
     
     def start_lesson(self):
-        # time.sleep(5)
         for num in range(self.num_rounds):
+            time.sleep(1)
             self.play_round(num)
         print(self.lesson_state)
 
-# TODO evaluate function
+
 class Report:
     def __init__(self, lesson_state: dict[list[str | float]]) -> None:
         self.lesson_state = lesson_state
