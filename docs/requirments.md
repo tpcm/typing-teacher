@@ -9,7 +9,7 @@ The project will be developed in multiple phases, though an end-to-end skeleton 
 ### Phase 1
 Functional requirements: To begin, the first goal should be to build the simplest version possible. Therefore, the initial development of the tool will be entirely terminal based, with no front end, and only one of the desired modes implemented. Showing random characters is likely the easiest and so will be what is shown.  
 
-Non-Functional Requirements: The tool will print out a word in the terminal, and ask for user input. At this point it will start a timer. The user will type back the word shown by the tool, and will need press enter to return the word. The tool will stop the timer and repeat the cycle, 10 times to begin with.
+Non-Functional Requirements: The tool will print out a word in the terminal, and ask for user input. At this point it will start a timer. The user will type back the word shown by the tool, and will need press enter to return the word. The tool will stop the timer and repeat the cycle, 3 times to begin with.
 
 Tool & Tech:  
 The backend will be written in Python, this is the only consideration needed for this first phase.
@@ -27,3 +27,16 @@ Steps
 10. ~~Calculate accuracy and time~~
 11. ~~Output results~~
 #### Phase 1 Complete.
+
+### Phase 2
+Functional requirements: Now that a simple backend has been created, need to create a simple frontend to hook it up to. The frontend needs to have a start button, and show the results in the middle of the screen and it will be black and white. The round's text to type will show up in the middle of the screen, and the user input will have a text box.
+
+Non-Functional requirements: The frontend will use either tkinter or pygame, quick exploration will be done on both to choose the appropriate one.
+
+Steps:
+1. Find out enough to choose between pygame or tkinter.
+2. Create quick diagram of basic layout.
+3. Find functions and classes that need to be used or made to get basic layout up.
+4. Code basic wireframe.
+5. Find out enough to try and integrate the backend and frontend.
+6. Try.
