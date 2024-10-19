@@ -34,8 +34,8 @@ Functional requirements: Now that a simple backend has been created, need to cre
 Non-Functional requirements: The frontend will use either tkinter or pygame, quick exploration will be done on both to choose the appropriate one.
 
 Steps:
-1. Find out enough to choose between pygame or tkinter.
-2. Create quick diagram of basic layout.
+1. ~~Find out enough to choose between pygame or tkinter.~~Tkinter
+2. ~~Create quick diagram of basic layout.~~
 3. Find functions and classes that need to be used or made to get basic layout up.
 4. Code basic wireframe.
 5. Find out enough to try and integrate the backend and frontend.
