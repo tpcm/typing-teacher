@@ -1,6 +1,8 @@
 import random
 import string
 import time
+import tkinter as tk
+from tkinter import ttk
 
 class Teacher:
     def __init__(self):
@@ -22,28 +24,90 @@ class Teacher:
 
     def teach(self):
         self.gen_random_word()
-        print(self.current_word)
-        user_input = input()
-        return self.current_word, user_input
+        return self.current_word
 
 
 class Lesson:
-    def __init__(self, num_rounds: int, teacher: Teacher):
-        self.num_rounds = num_rounds
+    def __init__(self, teacher: Teacher, canvas: tk.Canvas):
         self.teacher = teacher
+        self.canvas = canvas
         self.lesson_state: dict[list[str | float]] = {}
+        self.current_test_word: str
+        self.test_label = tk.Label(self.canvas)
+        self.current_round = 0
+        self.round_start_time: float
+        self.num_rounds: int
 
-    def play_round(self, round_num: int):
-        start_time = time.time()
-        test_word, user_input = self.teacher.teach()
-        time_taken = time.time() - start_time
-        self.lesson_state[round_num] = [test_word, user_input, time_taken]
+    def set_num_rounds(self, num_rounds):
+        self.num_rounds = int(num_rounds)
     
+    def show_test_word(self):
+        self.current_test_word = self.teacher.teach()
+        self.test_label["text"] = self.current_test_word
+        self.test_label.place(x=375, y=200)
+
+    def play_round(self):
+        print(self.num_rounds)
+        self.show_test_word()
+        user_input = tk.StringVar()
+        user_input_entry = ttk.Entry(self.canvas, width=10, textvariable=user_input)
+        user_input_entry.focus_set()
+        user_input_entry.place(x=350, y=400)
+        self.round_start_time = time.time()
+
+        def on_entry(_):
+            self.current_round += 1
+            self.lesson_state[self.current_round] = [
+                self.current_test_word, user_input.get(), time.time() - self.round_start_time
+            ]
+            print(f"Current round: {self.current_round}, Number of rounds: {self.num_rounds}")
+            print(f"Type of current_round: {type(self.current_round)}, Type of num_rounds: {type(self.num_rounds)}")
+            if self.current_round == self.num_rounds:
+                print("Ending lesson")
+                self.wipe_canvas()
+                self.end_lesson()
+            
+            user_input_entry.delete(first=0, last=10)
+            self.show_test_word()
+            self.round_start_time = time.time()
+
+        user_input_entry.bind("<Return>", on_entry)
+
+    def check_end_lesson(self):
+        if self.current_round == self.num_rounds:
+            print("yayay")
+            self.wipe_canvas()
+            self.end_lesson()
+            
+
+    def end_lesson(self):
+        self.wipe_canvas()
+        end_msg = "The lesson has finished, your results are shown below, thank you!"
+        end_label = tk.Label(self.canvas, text=end_msg)
+        end_label.place(x=210, y=300)
+        self.show_results()
+    
+    def show_results(self):
+        report = Report(self.lesson_state)
+        report.eval_each_round()
+        report.eval_final_score()
+        total_score, total_time_taken, time_per_round = report.all_rounds_evaluation
+        final_score_msg = (
+            f"total_score: {round(total_score, 2)}\n "
+            f"total_time_taken: {round(total_time_taken, 2)} seconds "
+            f"time_per_round: {round(time_per_round, 2)} seconds"
+        )
+        final_score_label = tk.Label(self.canvas, text=final_score_msg)
+        final_score_label.place(x=200, y=400)
+
     def start_lesson(self):
-        for num in range(self.num_rounds):
-            time.sleep(1)
-            self.play_round(num)
-        print(self.lesson_state)
+        self.wipe_canvas()
+        self.play_round()
+
+    def wipe_canvas(self):
+        for slave in self.canvas.place_slaves():
+            slave.destroy()
+
 
 
 class Report:
